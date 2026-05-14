@@ -12,6 +12,7 @@ Plans are intentionally separated from stable architecture and specification doc
 | `01-development-plan.md` | Phase-based implementation plan migrated from the v2.4 root docs. |
 | `02-phase-0-foundation.md` | Issue-level foundation tasks before Forge MVP generation. |
 | `03-phase-1-forge-mvp.md` | Issue-level Forge 1.20.1 MVP implementation tasks spanning the relevant development phases. The filename is historical and should not define a separate phase numbering system. |
+| `04-implementation-roadmap.md` | Practical implementation order, risk tiers, texture strategy, UI/CLI/Desktop boundaries, and GUI deferral rules. |
 
 ## Rule
 
