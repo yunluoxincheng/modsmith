@@ -1,0 +1,10 @@
+{
+  "minecraftVersion": "1.20.1",
+  "loader": "forge",
+  "forgeVersion": "47.4.10",
+  "mavenCoordinate": "net.minecraftforge:forge:1.20.1-47.4.10",
+  "mdkUrl": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.10/forge-1.20.1-47.4.10-mdk.zip",
+  "sha1": "31133abd261aa4d23672d1820db06ccec80326ad",
+  "source": "https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html",
+  "status": "acquisition-contract-not-extracted-mdk"
+}

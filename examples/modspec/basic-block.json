@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1",
+  "target": {
+    "loader": "forge",
+    "minecraftVersion": "1.20.1",
+    "javaVersion": 17,
+    "mappings": {
+      "channel": "official",
+      "version": "1.20.1"
+    },
+    "loaderVersion": "47.4.10",
+    "targetProfile": "forge-1.20.1"
+  },
+  "mod": {
+    "modId": "ruby_blocks",
+    "displayName": "Ruby Blocks",
+    "version": "0.1.0",
+    "description": "Adds a ruby block with a self drop.",
+    "packageName": "com.modsmith.generated.ruby_blocks",
+    "authors": [
+      "ModSmith AI"
+    ],
+    "license": "All Rights Reserved"
+  },
+  "content": {
+    "items": [],
+    "blocks": [
+      {
+        "id": "ruby_block",
+        "displayName": "Ruby Block",
+        "materialKind": "stone",
+        "hardness": 3.0,
+        "resistance": 6.0,
+        "requiresCorrectToolForDrops": false,
+        "creativeTab": "building_blocks",
+        "texture": {
+          "mode": "placeholder"
+        },
+        "dropsSelf": true,
+        "translations": {
+          "en_us": "Ruby Block",
+          "zh_cn": "红宝石块"
+        }
+      }
+    ],
+    "recipes": [],
+    "lootTables": [
+      {
+        "id": "ruby_block",
+        "type": "block_drops_self",
+        "block": "ruby_block"
+      }
+    ],
+    "tags": []
+  },
+  "unsupportedRequests": [],
+  "notes": [
+    "Phase 1 smoke-test ModSpec."
+  ],
+  "loaderExtensions": {
+    "forge": {}
+  }
+}

@@ -1,0 +1,492 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modsmith.local/schemas/modspec.schema.json",
+  "title": "ModSmith ModSpec v0.1 Base Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "target",
+    "mod",
+    "content"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "loader",
+        "minecraftVersion",
+        "loaderVersion",
+        "javaVersion",
+        "targetProfile"
+      ],
+      "properties": {
+        "loader": {
+          "type": "string",
+          "enum": [
+            "forge",
+            "fabric",
+            "neoforge",
+            "quilt"
+          ]
+        },
+        "minecraftVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+        },
+        "loaderVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "javaVersion": {
+          "type": "integer",
+          "enum": [
+            17,
+            21
+          ]
+        },
+        "targetProfile": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*(\\.[0-9]+)*$"
+        },
+        "mappings": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "channel": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+            }
+          },
+          "required": [
+            "channel",
+            "version"
+          ]
+        }
+      }
+    },
+    "mod": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modId",
+        "displayName",
+        "version",
+        "description",
+        "packageName"
+      ],
+      "properties": {
+        "modId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+([-+][A-Za-z0-9_.-]+)?$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "packageName": {
+          "type": "string",
+          "pattern": "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)+$"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "default": []
+        },
+        "license": {
+          "type": "string",
+          "default": "All Rights Reserved"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item"
+          },
+          "default": []
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          },
+          "default": []
+        },
+        "recipes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/recipe"
+          },
+          "default": []
+        },
+        "lootTables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lootTable"
+          },
+          "default": []
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "default": []
+        }
+      }
+    },
+    "unsupportedRequests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "feature",
+          "reason",
+          "originalText"
+        ],
+        "properties": {
+          "feature": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "originalText": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "loaderExtensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "default": {},
+      "description": "Optional adapter-specific metadata. Ordinary content must remain in loader-neutral fields."
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "translation": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "texture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "placeholder",
+            "generated",
+            "userProvided"
+          ]
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "sourceArtifactId": {
+          "type": "string"
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "basic",
+            "food"
+          ]
+        },
+        "maxStackSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64,
+          "default": 64
+        },
+        "creativeTab": {
+          "enum": [
+            "ingredients",
+            "building_blocks",
+            "natural_blocks",
+            "functional_blocks",
+            "redstone_blocks",
+            "tools_and_utilities",
+            "combat",
+            "food_and_drinks"
+          ]
+        },
+        "texture": {
+          "$ref": "#/$defs/texture"
+        },
+        "food": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nutrition",
+            "saturationModifier"
+          ],
+          "properties": {
+            "nutrition": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20
+            },
+            "saturationModifier": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 20
+            },
+            "alwaysEat": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "translations": {
+          "$ref": "#/$defs/translation"
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "materialKind"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "materialKind": {
+          "enum": [
+            "stone",
+            "dirt",
+            "wood",
+            "metal",
+            "glass",
+            "wool"
+          ]
+        },
+        "hardness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "resistance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1200
+        },
+        "requiresCorrectToolForDrops": {
+          "type": "boolean",
+          "default": false
+        },
+        "creativeTab": {
+          "enum": [
+            "building_blocks",
+            "natural_blocks",
+            "functional_blocks",
+            "redstone_blocks"
+          ]
+        },
+        "texture": {
+          "$ref": "#/$defs/texture"
+        },
+        "dropsSelf": {
+          "type": "boolean",
+          "default": true
+        },
+        "translations": {
+          "$ref": "#/$defs/translation"
+        }
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "result"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "enum": [
+            "shaped_crafting",
+            "shapeless_crafting",
+            "smelting"
+          ]
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "item",
+            "count"
+          ],
+          "properties": {
+            "item": {
+              "type": "string",
+              "pattern": "^([a-z][a-z0-9_]{1,63}:)?[a-z][a-z0-9_]{1,63}$"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 64
+            }
+          }
+        },
+        "pattern": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "key": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ingredients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ingredient": {
+          "type": "string"
+        },
+        "experience": {
+          "type": "number"
+        },
+        "cookingTime": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "lootTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "enum": [
+            "block_drops_self"
+          ]
+        },
+        "block": {
+          "type": "string"
+        }
+      }
+    },
+    "tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry",
+        "id",
+        "values"
+      ],
+      "properties": {
+        "registry": {
+          "enum": [
+            "items",
+            "blocks"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_./-]+$"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

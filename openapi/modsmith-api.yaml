@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: ModSmith AI API
+  version: 0.1.0
+servers:
+  - url: /api
+paths:
+  /jobs:
+    post:
+      summary: Create a generation job from a prompt or ModSpec
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+      responses:
+        '202':
+          description: Job accepted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobSummary' }
+  /jobs/{jobId}:
+    get:
+      summary: Get job summary
+      parameters: [ { $ref: '#/components/parameters/JobId' } ]
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/JobSummary' } } } }
+  /jobs/{jobId}/events:
+    get:
+      summary: Get job events
+      parameters: [ { $ref: '#/components/parameters/JobId' } ]
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/JobEvent' } } } } }
+  /jobs/{jobId}/modspec:
+    get:
+      summary: Get final or latest ModSpec snapshot
+      parameters: [ { $ref: '#/components/parameters/JobId' } ]
+      responses:
+        '200': { description: OK }
+  /jobs/{jobId}/logs:
+    get:
+      summary: Get build and generation logs
+      parameters: [ { $ref: '#/components/parameters/JobId' } ]
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/LogBundle' } } } }
+  /jobs/{jobId}/artifacts:
+    get:
+      summary: List downloadable artifacts
+      parameters: [ { $ref: '#/components/parameters/JobId' } ]
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/Artifact' } } } } }
+  /jobs/{jobId}/cancel:
+    post:
+      summary: Request job cancellation
+      parameters: [ { $ref: '#/components/parameters/JobId' } ]
+      responses:
+        '202': { description: Cancellation requested }
+  /modspec/validate:
+    post:
+      summary: Validate a ModSpec without creating a generation job
+      requestBody: { required: true, content: { application/json: { schema: { type: object } } } }
+      responses:
+        '200': { description: Validation result, content: { application/json: { schema: { $ref: '#/components/schemas/ValidationResult' } } } }
+components:
+  parameters:
+    JobId: { name: jobId, in: path, required: true, schema: { type: string, format: uuid } }
+  schemas:
+    CreateJobRequest:
+      type: object
+      properties:
+        mode: { type: string, enum: [prompt, modspec] }
+        prompt: { type: string }
+        modspec: { type: object }
+        targetProfile: { type: string, enum: [forge-1.20.1], default: forge-1.20.1 }
+      required: [mode]
+    JobSummary:
+      type: object
+      required: [jobId, status, stage, progress, createdAt, updatedAt]
+      properties:
+        jobId: { type: string, format: uuid }
+        status: { type: string, enum: [QUEUED, RUNNING, SUCCEEDED, FAILED, CANCEL_REQUESTED, CANCELLED] }
+        stage: { type: string, enum: [ACCEPTED, REQUIREMENT_ANALYSIS, MODSPEC_DRAFT, MODSPEC_VALIDATION, TARGET_PROFILE_VALIDATION, PROJECT_GENERATION, RESOURCE_GENERATION, TEXTURE_GENERATION, SANDBOX_BUILD, REPAIR_LOOP, ARTIFACT_EXPORT, DONE] }
+        progress: { type: integer, minimum: 0, maximum: 100 }
+        failure: { $ref: '#/components/schemas/ErrorResponse' }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    JobEvent:
+      type: object
+      properties:
+        sequence: { type: integer }
+        timestamp: { type: string, format: date-time }
+        stage: { type: string }
+        level: { type: string, enum: [INFO, WARN, ERROR] }
+        message: { type: string }
+    ValidationResult:
+      type: object
+      properties:
+        valid: { type: boolean }
+        errors: { type: array, items: { $ref: '#/components/schemas/ValidationError' } }
+        warnings: { type: array, items: { $ref: '#/components/schemas/ValidationError' } }
+    ValidationError:
+      type: object
+      properties:
+        path: { type: string }
+        code: { type: string }
+        message: { type: string }
+    ErrorResponse:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+        retryable: { type: boolean }
+        details: { type: object }
+    LogBundle:
+      type: object
+      properties:
+        generationLog: { type: string }
+        buildLog: { type: string }
+        repairLog: { type: string }
+    Artifact:
+      type: object
+      properties:
+        artifactId: { type: string }
+        type: { type: string, enum: [PROJECT_ZIP, MOD_JAR, MODSPEC, BUILD_LOG, FAILURE_REPORT] }
+        filename: { type: string }
+        sizeBytes: { type: integer }
+        sha256: { type: string }
+        downloadUrl: { type: string }

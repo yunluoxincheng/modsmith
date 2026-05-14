@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1",
+  "target": {
+    "loader": "forge",
+    "minecraftVersion": "1.20.1",
+    "javaVersion": 17,
+    "mappings": {
+      "channel": "official",
+      "version": "1.20.1"
+    },
+    "loaderVersion": "47.4.10",
+    "targetProfile": "forge-1.20.1"
+  },
+  "mod": {
+    "modId": "copper_tools",
+    "displayName": "Copper Tools",
+    "version": "0.1.0",
+    "description": "Adds a simple copper nugget item for the first generator test.",
+    "packageName": "com.modsmith.generated.copper_tools",
+    "authors": [
+      "ModSmith AI"
+    ],
+    "license": "All Rights Reserved"
+  },
+  "content": {
+    "items": [
+      {
+        "id": "copper_nugget",
+        "displayName": "Copper Nugget",
+        "type": "basic",
+        "maxStackSize": 64,
+        "creativeTab": "ingredients",
+        "texture": {
+          "mode": "placeholder"
+        },
+        "translations": {
+          "en_us": "Copper Nugget",
+          "zh_cn": "铜粒"
+        }
+      }
+    ],
+    "blocks": [],
+    "recipes": [],
+    "lootTables": [],
+    "tags": []
+  },
+  "unsupportedRequests": [],
+  "notes": [
+    "Phase 1 smoke-test ModSpec."
+  ],
+  "loaderExtensions": {
+    "forge": {}
+  }
+}
