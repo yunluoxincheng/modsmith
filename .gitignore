@@ -1,0 +1,45 @@
+# Windows metadata
+*:Zone.Identifier
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux/editor temporary files
+*~
+*.swp
+*.swo
+
+# IDE/editor local state
+.idea/
+.vscode/
+
+# Java/Gradle build outputs
+.gradle/
+build/
+target/
+out/
+
+# Node/package manager outputs
+node_modules/
+dist/
+coverage/
+
+# Logs
+*.log
+
+# Environment and local config
+.env
+.env.*
+!.env.example
+*.local
+
+# Generated archives/artifacts
+*.zip
+*.tar
+*.tar.gz
+*.tgz
