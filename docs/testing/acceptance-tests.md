@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Acceptance tests define what counts as complete for each development phase.
+Acceptance tests define reusable completion gates for validation, template, generator, resource, sandbox, API, and AI behavior. Development phases may reference one or more acceptance groups.
 
-## Phase 1: ModSpec Validation
+## Validation Acceptance Group
 
 | Case | Input | Expected |
 |---|---|---|
@@ -14,7 +14,7 @@ Acceptance tests define what counts as complete for each development phase.
 | `invalid-duplicate-id` | `examples/modspec/invalid-cases/duplicate-id.json` | Pass base JSON Schema, then fail semantic validation with duplicate ID error. |
 | `invalid-path-traversal` | `examples/modspec/invalid-cases/path-traversal-id.json` | Fail schema validation. |
 
-## Phase 2: Forge Template
+## Forge Template Acceptance Group
 
 | Case | Expected |
 |---|---|
@@ -22,7 +22,7 @@ Acceptance tests define what counts as complete for each development phase.
 | `template-build-empty` | Normalized minimal template builds before ModSmith content generation. |
 | `no-loader-mixing` | Template contains no Fabric or NeoForge metadata/imports. |
 
-## Phase 3: Deterministic Generator
+## Deterministic Generator Acceptance Group
 
 | Case | Expected files |
 |---|---|
@@ -32,7 +32,7 @@ Acceptance tests define what counts as complete for each development phase.
 
 Each generated project must keep all paths within the workspace.
 
-## Phase 4: Resource Generation
+## Resource Generation Acceptance Group
 
 | Case | Expected |
 |---|---|
@@ -40,7 +40,7 @@ Each generated project must keep all paths within the workspace.
 | `lang-en-us` | `assets/<modid>/lang/en_us.json` contains display names. |
 | `lang-zh-cn` | `assets/<modid>/lang/zh_cn.json` contains Chinese display names when provided. |
 
-## Phase 5: Sandbox Build
+## Sandbox Build Acceptance Group
 
 | Case | Expected |
 |---|---|
@@ -49,7 +49,7 @@ Each generated project must keep all paths within the workspace.
 | `log-capture` | Build stdout/stderr are captured and truncated safely. |
 | `artifact-collect` | JAR, project ZIP, ModSpec, and logs are exported. |
 
-## Phase 6: Server Job API
+## Server Job API Acceptance Group
 
 | Case | Expected |
 |---|---|
@@ -58,7 +58,7 @@ Each generated project must keep all paths within the workspace.
 | `failed-job` | Failure has stable error code and safe message. |
 | `cancel-job` | Cancellation is best-effort and terminal state is visible. |
 
-## Phase 7: AI to ModSpec
+## AI to ModSpec Acceptance Group
 
 | Case | Expected |
 |---|---|

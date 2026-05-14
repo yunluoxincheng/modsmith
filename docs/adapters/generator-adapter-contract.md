@@ -82,7 +82,7 @@ Each adapter should expose a machine-readable capability report:
 {
   "adapterId": "forge-1.20.1",
   "content": {
-    "items": ["basic", "food", "tool", "weapon"],
+    "items": ["basic", "food"],
     "blocks": ["basic"],
     "recipes": ["shaped", "shapeless", "smelting"],
     "lootTables": ["self_drop"],
@@ -93,6 +93,8 @@ Each adapter should expose a machine-readable capability report:
 ```
 
 The AI prompt layer should use this report to avoid inventing unsupported features.
+
+Tools and weapons are post-MVP optional capabilities. They must not appear in the first required capability report until the `ModSpec` schema, adapter implementation, and acceptance tests explicitly support them.
 
 ## Template Provider
 

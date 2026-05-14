@@ -36,7 +36,6 @@ The first adapter must support the following capabilities:
 | Basic items | Generate item registration, item model, texture reference, and language entry. |
 | Basic blocks | Generate block registration, block item, blockstate, models, texture reference, loot table, and language entry. |
 | Food items | Generate basic item properties for food values. |
-| Simple tools/weapons | Generate simple item classes or property definitions where supported by the adapter. |
 | Recipes | Generate simple crafting and smelting recipes. |
 | Loot tables | Generate simple block self-drop loot tables. |
 | Textures | Generate or place basic 16x16 PNG assets. |
@@ -54,6 +53,7 @@ The first adapter may support these if they do not delay the core pipeline:
 - Simple file tree preview.
 - Basic build log display.
 - A small library of example prompts.
+- Simple tools or weapons, only after required basic item/block/recipe generation builds reliably.
 
 ## 6. First Adapter Must Not Support
 
@@ -85,8 +85,9 @@ The first adapter should focus on small content mods, such as:
 - A set of decorative blocks.
 - A simple ore-like block without world generation.
 - Food items with names and textures.
-- Tool or weapon variants using simple properties.
 - Crafting-based content packs.
+
+Tool or weapon variants are intentionally post-MVP unless a separate OpenSpec change promotes them into the required scope.
 
 ## 8. Out-of-Scope Example Requests
 

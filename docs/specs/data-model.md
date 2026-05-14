@@ -57,7 +57,7 @@ Append-only timeline.
 |---|---|---|
 | `id` | UUID PK | Artifact ID. |
 | `job_id` | UUID FK | Parent job. |
-| `type` | text | `PROJECT_ZIP`, `MOD_JAR`, `MODSPEC`, `BUILD_LOG`, `FAILURE_REPORT`. |
+| `type` | text | `PROJECT_ZIP`, `MOD_JAR`, `MODSPEC`, `BUILD_LOG`, `GENERATION_SUMMARY`, `FAILURE_REPORT`, `REPAIR_HISTORY`. |
 | `storage_key` | text | Local path or object key. |
 | `filename` | text | Download filename. |
 | `size_bytes` | bigint | Artifact size. |

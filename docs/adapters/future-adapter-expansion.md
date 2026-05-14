@@ -16,7 +16,7 @@ This document defines how future adapters are introduced without polluting the c
 | Adapter ID | `forge-1.20.1` |
 | Minecraft | `1.20.1` |
 | Loader | `forge` |
-| Loader version baseline | `47.4.10` Recommended |
+| Loader version baseline | `47.4.10` pinned recommended baseline |
 | Generated mod Java target | Java 17 |
 | Status | Production target for the first complete pipeline |
 

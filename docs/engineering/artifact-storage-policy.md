@@ -6,7 +6,9 @@
 - Built mod JAR.
 - Final ModSpec JSON.
 - Build log.
+- Generation summary.
 - Failure report.
+- Repair history when repairs were attempted.
 
 ## Naming
 

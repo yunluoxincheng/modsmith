@@ -11,6 +11,8 @@ Use two validation layers:
 
 JSON Schema should validate structure, primitive constraints, required fields, enums, and safe ID patterns. Semantic validation should handle duplicate IDs, cross-reference checks, adapter capability checks, and unsupported target features.
 
+Recipe and tag validation intentionally spans both layers. The base JSON Schema keeps the shape compact, while semantic validation must enforce recipe-type-specific required fields, missing references, tag path normalization, and traversal-like tag segments.
+
 ## Local Schema Registry
 
 Do not rely on network access to resolve schema references.

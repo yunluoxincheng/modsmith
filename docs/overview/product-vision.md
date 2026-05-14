@@ -87,7 +87,6 @@ The first adapter should generate complete Forge 1.20.1 projects that support:
 - Basic blocks.
 - Block items.
 - Food items.
-- Simple tools and weapons.
 - Simple crafting recipes.
 - Simple smelting recipes.
 - Simple block loot tables.
@@ -143,6 +142,7 @@ Future versions may support:
 - Tags and data generation.
 - Project history.
 - Web-based ModSpec editor.
+- Simple tools and weapons after the base item/block pipeline is stable.
 - GitHub export.
 - Publishing assistance.
 

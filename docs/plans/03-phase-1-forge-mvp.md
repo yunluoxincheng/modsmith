@@ -1,6 +1,6 @@
-# Phase 1 Forge MVP Tasks
+# Forge MVP Execution Tasks
 
-Phase 1 implements the first buildable generation path for `forge-1.20.1`.
+This issue-level plan implements the first buildable generation path for `forge-1.20.1`. It spans the template, adapter, sandbox, repair, and API phases from the broader development plan; it is not a separate phase numbering system.
 
 ## Goals
 
@@ -26,4 +26,4 @@ Phase 1 implements the first buildable generation path for `forge-1.20.1`.
 
 ## Exit Criteria
 
-Phase 1 is complete when the acceptance tests in `docs/testing/acceptance-tests.md` pass for the required MVP capability set and every successful job exports a buildable Forge 1.20.1 project ZIP.
+The Forge MVP is complete when the acceptance tests in `docs/testing/acceptance-tests.md` pass for the required MVP capability set and every successful job exports a buildable Forge 1.20.1 project ZIP.

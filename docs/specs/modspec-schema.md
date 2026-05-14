@@ -56,7 +56,7 @@ The first profile requires:
 | `target.targetProfile` | `forge-1.20.1` |
 | `target.loader` | `forge` |
 | `target.minecraftVersion` | `1.20.1` |
-| `target.loaderVersion` | `47.4.10` for the pinned baseline, or an explicitly approved `47.x.y` value |
+| `target.loaderVersion` | `47.4.10` for the pinned first baseline |
 | `target.javaVersion` | `17` |
 | `target.mappings.channel` | `official` |
 | `target.mappings.version` | `1.20.1` |
@@ -151,6 +151,10 @@ The semantic validator must additionally check:
 - conflicts between item, block, recipe, loot table, and tag IDs where the selected adapter would generate colliding files;
 - unsupported content types for the selected target profile;
 - references to missing items, blocks, tags, or recipes;
+- recipe-type-specific required fields, such as shaped crafting pattern/key pairs, shapeless ingredients, and smelting ingredient/cooking fields;
+- tag IDs and values after path normalization, including rejection of traversal-like segments even when the base schema permits path-like tag names;
 - loader-specific rules that cannot be expressed safely in the base schema.
+
+Any future Forge `47.x.y` compatibility policy beyond `47.4.10` must be introduced through an OpenSpec change that updates the target profile schema, template metadata, and build acceptance tests together.
 
 For example, `examples/modspec/invalid-cases/duplicate-id.json` is expected to pass the base JSON Schema but fail semantic validation with a duplicate ID error.

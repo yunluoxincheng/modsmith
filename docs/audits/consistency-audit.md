@@ -82,6 +82,18 @@ The v2.4.3 documentation package adds a dedicated research notes area:
 3. Moved engineering-oriented AI agent and cache system research into `docs/research/ai-agent-and-cache-systems-engineering-research.md`.
 4. Clarified that research notes are planning references, not canonical specifications until promoted into stable docs.
 
+## v2.4.4 Planning Convergence Notes
+
+The v2.4.4 documentation package tightens planning contracts before implementation:
+
+1. Aligned `VERSION.md` with the latest audit notes.
+2. Clarified that the required MVP excludes simple tools and weapons until the base Forge pipeline is build-verified.
+3. Replaced the inconsistent `CREATED` job state with API-aligned `QUEUED` status and `ACCEPTED` stage.
+4. Clarified that the first `forge-1.20.1` profile pins Forge `47.4.10`; any wider Forge `47.x.y` policy requires a future OpenSpec change.
+5. Clarified that issue-level Forge MVP tasks are not a separate phase numbering system.
+6. Tightened the OpenAPI job creation contract so prompt mode and ModSpec mode have distinct required fields.
+7. Added explicit notes that recipe and tag shape rules require semantic validation beyond the base JSON Schema.
+
 ## Validation Boundary
 
 The documentation uses two validation layers:

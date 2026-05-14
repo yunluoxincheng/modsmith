@@ -44,6 +44,8 @@ The goal is to keep the first implementation small, buildable, and testable. Uns
 | File tree preview | Useful for UI, but not a generation requirement. |
 | Texture regeneration | Useful after MVP build pipeline is stable. |
 
+Simple tools and weapons are not part of the required MVP and are not represented by the required `ModSpec` v0.1 item types.
+
 ## Unsupported in MVP
 
 The first MVP must not generate entities, block entities, GUIs, networking, mixins, custom dimensions, world generation, custom fluids, custom enchantments, capabilities, custom commands, or arbitrary user-provided Java code.

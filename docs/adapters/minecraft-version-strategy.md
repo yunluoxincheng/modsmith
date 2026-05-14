@@ -14,7 +14,7 @@ A profile must define:
 
 - Loader name.
 - Minecraft version.
-- Loader version or version range.
+- Loader version or explicitly approved version range.
 - Java target.
 - Gradle or build system assumptions.
 - Required template source.
@@ -46,7 +46,7 @@ The first supported profile is:
 | Generated mod Java target | `17` |
 | Template source | Official Forge MDK |
 
-This profile is the first production adapter baseline, not the final product scope.
+This profile pins Forge `47.4.10` for the first implementation. A wider Forge `47.x.y` range is a future compatibility decision, not part of the initial `forge-1.20.1` contract.
 
 ## 4. Loader Mixing Is Forbidden
 

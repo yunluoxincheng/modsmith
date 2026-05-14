@@ -37,7 +37,7 @@ paths:
       summary: Get final or latest ModSpec snapshot
       parameters: [ { $ref: '#/components/parameters/JobId' } ]
       responses:
-        '200': { description: OK }
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ModSpecSnapshot' } } } }
   /jobs/{jobId}/logs:
     get:
       summary: Get build and generation logs
@@ -59,7 +59,7 @@ paths:
   /modspec/validate:
     post:
       summary: Validate a ModSpec without creating a generation job
-      requestBody: { required: true, content: { application/json: { schema: { type: object } } } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ValidateModSpecRequest' } } } }
       responses:
         '200': { description: Validation result, content: { application/json: { schema: { $ref: '#/components/schemas/ValidationResult' } } } }
 components:
@@ -67,13 +67,58 @@ components:
     JobId: { name: jobId, in: path, required: true, schema: { type: string, format: uuid } }
   schemas:
     CreateJobRequest:
+      oneOf:
+        - $ref: '#/components/schemas/PromptJobRequest'
+        - $ref: '#/components/schemas/ModSpecJobRequest'
+      discriminator:
+        propertyName: mode
+        mapping:
+          prompt: '#/components/schemas/PromptJobRequest'
+          modspec: '#/components/schemas/ModSpecJobRequest'
+    PromptJobRequest:
       type: object
+      additionalProperties: false
+      required: [mode, prompt]
       properties:
-        mode: { type: string, enum: [prompt, modspec] }
-        prompt: { type: string }
-        modspec: { type: object }
+        mode: { type: string, enum: [prompt] }
+        prompt: { type: string, minLength: 1 }
         targetProfile: { type: string, enum: [forge-1.20.1], default: forge-1.20.1 }
-      required: [mode]
+    ModSpecJobRequest:
+      type: object
+      additionalProperties: false
+      required: [mode, modspec]
+      properties:
+        mode: { type: string, enum: [modspec] }
+        modspec: { $ref: '#/components/schemas/ModSpec' }
+        targetProfile: { type: string, enum: [forge-1.20.1], default: forge-1.20.1 }
+    ValidateModSpecRequest:
+      type: object
+      additionalProperties: false
+      required: [modspec]
+      properties:
+        modspec: { $ref: '#/components/schemas/ModSpec' }
+        targetProfile: { type: string, enum: [forge-1.20.1], default: forge-1.20.1 }
+    ModSpec:
+      type: object
+      description: Full ModSpec document. Implementations must validate against schemas/modspec.schema.json and the selected profile schema.
+      required: [schemaVersion, target, mod, content]
+      properties:
+        schemaVersion: { type: string, enum: ['0.1'] }
+        target: { type: object }
+        mod: { type: object }
+        content: { type: object }
+        unsupportedRequests: { type: array, items: { type: object } }
+        notes: { type: array, items: { type: string } }
+        loaderExtensions: { type: object }
+      additionalProperties: false
+    ModSpecSnapshot:
+      type: object
+      required: [kind, modspec, validationResult, createdAt]
+      properties:
+        kind: { type: string, enum: [draft, validated, repaired] }
+        modspec: { $ref: '#/components/schemas/ModSpec' }
+        validationResult: { $ref: '#/components/schemas/ValidationResult' }
+        createdAt: { type: string, format: date-time }
     JobSummary:
       type: object
       required: [jobId, status, stage, progress, createdAt, updatedAt]
@@ -95,6 +140,7 @@ components:
         message: { type: string }
     ValidationResult:
       type: object
+      required: [valid, errors, warnings]
       properties:
         valid: { type: boolean }
         errors: { type: array, items: { $ref: '#/components/schemas/ValidationError' } }
@@ -122,7 +168,7 @@ components:
       type: object
       properties:
         artifactId: { type: string }
-        type: { type: string, enum: [PROJECT_ZIP, MOD_JAR, MODSPEC, BUILD_LOG, FAILURE_REPORT] }
+        type: { type: string, enum: [PROJECT_ZIP, MOD_JAR, MODSPEC, BUILD_LOG, GENERATION_SUMMARY, FAILURE_REPORT, REPAIR_HISTORY] }
         filename: { type: string }
         sizeBytes: { type: integer }
         sha256: { type: string }

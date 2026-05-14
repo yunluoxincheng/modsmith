@@ -98,11 +98,12 @@ The directory `templates/forge-1.20.1/minimal/` contains:
 
 These are not a substitute for the official MDK ZIP. They are a contract and acquisition scaffold to prevent accidental Fabric/NeoForge mixing or unverified hand-written templates.
 
-## Completion Criteria for Phase 2
+## Completion Criteria for Template Baseline
 
-Phase 2 is not complete until:
+The template baseline is not complete until:
 
 1. The official MDK was fetched and SHA1-verified.
 2. The normalized template was committed.
-3. A generated basic-item project builds successfully.
-4. CI includes a generated-project build test.
+3. The normalized template builds in the sandbox before ModSmith content generation.
+
+The first generated-project build gate is separate: a generated basic-item project must build successfully before the Forge MVP can be considered complete.

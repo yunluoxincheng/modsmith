@@ -16,7 +16,7 @@ The system SHALL keep core ModSpec and orchestration logic loader-agnostic. The 
 - WHEN the system creates a ModSpec
 - THEN the ModSpec SHALL use loader `forge`
 - AND Minecraft version `1.20.1`
-- AND loader version `47.4.10` unless an approved compatible Forge 47.x baseline is selected
+- AND loader version `47.4.10`
 - AND Java version `17`
 
 ### Requirement: Generate from ModSpec
@@ -96,7 +96,7 @@ The system SHALL build generated projects only inside a sandbox.
 
 ### Requirement: Attempt bounded repair only when allowed
 
-The system MAY attempt bounded repair after a failed sandbox build.
+The system SHALL attempt bounded repair only after a failed sandbox build is classified as repairable and repair attempts remain.
 
 #### Scenario: Build fails with a repairable compile error
 

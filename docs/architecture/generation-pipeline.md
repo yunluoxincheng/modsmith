@@ -32,7 +32,8 @@ Prompt
 ### Output
 
 - Generation job ID.
-- Initial job state `CREATED`.
+- Initial job status `QUEUED`.
+- Initial job stage `ACCEPTED`.
 
 ### Failure Conditions
 

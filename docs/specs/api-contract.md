@@ -63,18 +63,60 @@ Prompt mode:
 ```json
 {
   "mode": "prompt",
-  "prompt": "Add a ruby block and a ruby item."
+  "prompt": "Add a ruby block and a ruby item.",
+  "targetProfile": "forge-1.20.1"
 }
 ```
+
+Prompt mode requires `prompt` and must not include `modspec`.
 
 Direct ModSpec mode:
 
 ```json
 {
   "mode": "modspec",
-  "modspec": { "schemaVersion": "0.1" }
+  "modspec": {
+    "schemaVersion": "0.1",
+    "target": {},
+    "mod": {},
+    "content": {}
+  }
 }
 ```
+
+Direct ModSpec mode requires `modspec` and must not include `prompt`. The submitted document is still validated against the base ModSpec schema, target profile schema, semantic rules, and adapter capabilities before generation.
+
+## ModSpec Snapshot Response
+
+`GET /api/jobs/{jobId}/modspec` returns the latest available snapshot:
+
+```json
+{
+  "kind": "validated",
+  "modspec": { "schemaVersion": "0.1" },
+  "validationResult": {
+    "valid": true,
+    "errors": [],
+    "warnings": []
+  },
+  "createdAt": "2026-05-14T00:00:00Z"
+}
+```
+
+Valid `kind` values are `draft`, `validated`, and `repaired`.
+
+## Validation Request
+
+`POST /api/modspec/validate` accepts:
+
+```json
+{
+  "modspec": { "schemaVersion": "0.1" },
+  "targetProfile": "forge-1.20.1"
+}
+```
+
+The validation endpoint must not create a generation job.
 
 ## Frontend Consumption Rule
 
