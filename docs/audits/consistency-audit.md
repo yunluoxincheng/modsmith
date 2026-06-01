@@ -118,6 +118,15 @@ The v2.4.6 documentation package tightens the Phase 0 ModSpec validation contrac
 4. Corrected `examples/modspec/item-with-recipe.json` description.
 5. Clarified that wrong `loaderExtensions` keys should be classified as target profile validation errors.
 
+## v2.4.7 Branch and PR Workflow Notes
+
+The v2.4.7 documentation package establishes repository contribution workflow before implementation work begins:
+
+1. Added `.github/pull_request_template.md`.
+2. Added `docs/engineering/branch-and-pr-workflow.md`.
+3. Added the branch and PR workflow to the documentation index and repository structure.
+4. Clarified that meaningful changes should use feature branches and pull requests before merging to `master`.
+
 ## Validation Boundary
 
 The documentation uses two validation layers:
