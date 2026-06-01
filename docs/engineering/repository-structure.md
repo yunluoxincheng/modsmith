@@ -4,6 +4,8 @@ This document defines the intended repository layout for ModSmith AI. It is the 
 
 The project is a loader-agnostic Minecraft mod generation platform with a Forge-first implementation. That means the core packages must stay independent from Forge, while the first active generator adapter targets Forge 1.20.1.
 
+The repository is named `modsmith`; the product name is `ModSmith AI`.
+
 ## Status Legend
 
 | Status | Meaning |
@@ -16,7 +18,7 @@ The project is a loader-agnostic Minecraft mod generation platform with a Forge-
 ## Final Repository Tree
 
 ```text
-modsmith-ai/
+modsmith/
 ├─ README.md
 ├─ VERSION.md
 ├─ AGENTS.md
@@ -131,6 +133,7 @@ modsmith-ai/
    │  ├─ development-guidelines.md
    │  ├─ openspec-workflow.md
    │  ├─ build-and-sandbox-policy.md
+   │  ├─ sandbox-threat-model.md
    │  ├─ sandbox-runtime.md
    │  ├─ artifact-storage-policy.md
    │  ├─ security-checklist.md

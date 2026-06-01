@@ -9,6 +9,7 @@ This document records the cross-document consistency rules for the ModSmith AI d
 | Area | Canonical decision |
 |---|---|
 | Product identity | Structured AI Agent system for Minecraft Java Edition mod generation. |
+| Repository identity | Repository name is `modsmith`; product name is `ModSmith AI`. |
 | Core architecture | Loader-agnostic core plus loader/version-specific `GeneratorAdapter` modules. |
 | First active adapter | `forge-1.20.1`. |
 | First loader baseline | Forge `47.4.10` Recommended for Minecraft `1.20.1`. |
@@ -32,6 +33,7 @@ The following document groups must agree with each other:
 - `docs/specs/api-contract.md` and `openapi/modsmith-api.yaml`.
 - `docs/specs/data-model.md`, `docs/specs/llm-interaction-log.md`, and the `ModSpec.target` fields.
 - `docs/adapters/generator-adapter-contract.md`, `docs/adapters/future-adapter-expansion.md`, and `docs/engineering/repository-structure.md`.
+- `docs/engineering/build-and-sandbox-policy.md`, `docs/engineering/sandbox-runtime.md`, and `docs/engineering/sandbox-threat-model.md`.
 - `docs/testing/acceptance-tests.md` and `examples/modspec/`.
 - `prompts/*.md`, prompt block strategy documents, and the current primary target profile.
 
@@ -94,6 +96,18 @@ The v2.4.4 documentation package tightens planning contracts before implementati
 6. Tightened the OpenAPI job creation contract so prompt mode and ModSpec mode have distinct required fields.
 7. Added explicit notes that recipe and tag shape rules require semantic validation beyond the base JSON Schema.
 
+## v2.4.5 Phase 0 Foundation Notes
+
+The v2.4.5 documentation package improves first-reader clarity and Phase 0 implementation readiness:
+
+1. Added a root README status checklist and current generation capability statement.
+2. Added a concrete Tier 0 example flow with unsupported request handling.
+3. Added root README links to ModSpec schema and example assets.
+4. Added an OpenSpec quick decision table.
+5. Added `docs/engineering/sandbox-threat-model.md`.
+6. Clarified that the repository name is `modsmith` while the product name is `ModSmith AI`.
+7. Verified valid ModSpec examples pass base and Forge profile JSON Schema validation, path traversal fails base validation, and duplicate IDs remain a semantic-validation fixture.
+
 ## Validation Boundary
 
 The documentation uses two validation layers:
@@ -152,3 +166,4 @@ When updating the docs, check:
 11. Do AI calls still route through `packages/llm` rather than direct provider SDK usage?
 12. Do prompt changes preserve stable block ordering or intentionally update prompt/cache versions?
 13. Does `ai_interaction_log` still capture provider, model, token, latency, and cache metrics?
+14. Does the sandbox threat model still match build policy, sandbox runtime, artifact export, and repair-loop constraints?

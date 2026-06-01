@@ -35,6 +35,19 @@ OpenSpec may be skipped for:
 
 When unsure, create a small OpenSpec change.
 
+## 3.1 Quick Decision Table
+
+| Needs OpenSpec | No OpenSpec needed |
+|---|---|
+| Add a new generated content type. | Fix a typo. |
+| Change the `ModSpec` shape or schema version. | Add a unit test for existing behavior. |
+| Add or promote a target profile. | Refactor a private helper without behavior changes. |
+| Change sandbox policy or generated build execution. | Improve internal logging without API or user-visible behavior changes. |
+| Change REST API request or response contracts. | Reword documentation without changing policy. |
+| Add or change LLM provider behavior. | Format files already touched by the same change. |
+
+These examples are not exhaustive. If a change affects public behavior, generated output, validation rules, architecture, version support, security, or API contracts, create an OpenSpec change.
+
 ## 4. Change Directory Structure
 
 Use one folder per proposed change:

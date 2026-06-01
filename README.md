@@ -4,6 +4,31 @@ ModSmith AI is a structured AI Agent system for Minecraft Java Edition mod gener
 
 The product direction is **loader-agnostic at the core level**. The system turns a natural-language mod idea into a validated `ModSpec`, then selects a deterministic loader/version-specific `GeneratorAdapter` to produce a complete, buildable Minecraft mod project. AI is used to understand requirements, propose structured specifications, generate asset prompts, and help analyze build failures. AI must not be the source of uncontrolled full-project output. All model access must go through the LLM Gateway so provider formats, prompt composition, cache policy, and observability stay centralized.
 
+## Status
+
+- [x] Product architecture documented.
+- [x] Forge-first target selected.
+- [x] ModSpec JSON Schema files added.
+- [x] Example ModSpecs added.
+- [ ] Executable ModSpec validation implementation.
+- [ ] Spring server skeleton.
+- [ ] Forge template verification.
+- [ ] Deterministic Tier 0 generator.
+- [ ] Sandbox build verification.
+- [ ] AI text-to-ModSpec pipeline.
+- [ ] Web UI.
+
+## What can ModSmith generate today?
+
+Current status: documentation and Phase 0 contract assets. The repository does not yet generate or build Minecraft mods.
+
+Planned first MVP:
+
+- Input: natural-language idea or `ModSpec` JSON.
+- Output: buildable Forge 1.20.1 mod project.
+- First supported content: basic items, food items, basic blocks, recipes, loot tables, language files, model JSON, and placeholder textures.
+- Not supported in MVP: entities, dimensions, GUI, networking, world generation, arbitrary custom Java code, or mixed-loader output.
+
 ## Product Positioning
 
 | Layer | Position |
@@ -44,6 +69,57 @@ Natural language prompt
   -> exported ZIP/JAR/logs
 ```
 
+## Example Flow
+
+User prompt:
+
+```text
+Generate a ruby mod with a ruby item, ruby block, ruby sword, and a crafting recipe for ruby_block.
+```
+
+Requirement analysis:
+
+```text
+Supported for planned Tier 0 MVP:
+- ruby item
+- ruby block
+- ruby_block crafting recipe
+
+Unsupported for planned Tier 0 MVP:
+- ruby sword, because simple tools and weapons are outside the required MVP content set
+```
+
+ModSpec excerpt:
+
+```json
+{
+  "schemaVersion": "0.1",
+  "target": {
+    "loader": "forge",
+    "minecraftVersion": "1.20.1",
+    "loaderVersion": "47.4.10",
+    "javaVersion": 17,
+    "targetProfile": "forge-1.20.1"
+  },
+  "unsupportedRequests": [
+    {
+      "feature": "simple_weapon",
+      "reason": "Simple tools and weapons are outside the required Tier 0 MVP.",
+      "originalText": "ruby sword"
+    }
+  ]
+}
+```
+
+Planned successful artifacts:
+
+- Generated project ZIP.
+- Built mod JAR.
+- Final validated `ModSpec`.
+- Build log.
+- Generation summary.
+- Failure report when generation fails.
+
 ## MVP Output
 
 A successful generation job should export:
@@ -60,10 +136,21 @@ A successful generation job should export:
 
 The final repository tree is defined in `docs/engineering/repository-structure.md`. The documentation entry point is `docs/README.md`.
 
+The repository is named `modsmith`; the product name is `ModSmith AI`.
+
 Important distinction:
 
 - `packages/generator-forge-1.20.1/` is the active first adapter package.
 - `packages/generator-fabric/`, `packages/generator-neoforge/`, and `packages/generator-quilt/` are README-only placeholders until promoted through the future adapter process.
+
+## ModSpec Assets
+
+Phase 0 validation assets:
+
+- Base schema: `schemas/modspec.schema.json`.
+- First target profile schema: `schemas/profiles/forge-1.20.1.schema.json`.
+- Valid examples: `examples/modspec/basic-item.json`, `examples/modspec/basic-block.json`, and `examples/modspec/item-with-recipe.json`.
+- Invalid examples: `examples/modspec/invalid-cases/duplicate-id.json` and `examples/modspec/invalid-cases/path-traversal-id.json`.
 
 ## Documentation Map
 
@@ -86,6 +173,7 @@ Primary entry points:
 | ModSpec schema notes | `docs/specs/modspec-schema.md` |
 | Forge first adapter | `docs/adapters/forge-1.20.1/template-contract.md` |
 | Repository structure | `docs/engineering/repository-structure.md` |
+| Sandbox threat model | `docs/engineering/sandbox-threat-model.md` |
 | Development plans | `docs/plans/README.md` |
 
 ## Future Adapter Placeholder Rule

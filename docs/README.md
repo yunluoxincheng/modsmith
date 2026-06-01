@@ -22,6 +22,7 @@ The documentation is organized by responsibility. Keep the root of `docs/` small
 | First Forge adapter rules | `adapters/forge-1.20.1/template-contract.md` |
 | Repository layout | `engineering/repository-structure.md` |
 | Local setup | `engineering/local-development-setup.md` |
+| Sandbox threat model | `engineering/sandbox-threat-model.md` |
 | Active development plans | `plans/README.md` |
 
 ## Directory Map
