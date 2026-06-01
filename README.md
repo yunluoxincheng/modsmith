@@ -99,7 +99,11 @@ ModSpec excerpt:
     "minecraftVersion": "1.20.1",
     "loaderVersion": "47.4.10",
     "javaVersion": 17,
-    "targetProfile": "forge-1.20.1"
+    "targetProfile": "forge-1.20.1",
+    "mappings": {
+      "channel": "official",
+      "version": "1.20.1"
+    }
   },
   "unsupportedRequests": [
     {
