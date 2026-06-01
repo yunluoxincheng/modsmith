@@ -150,7 +150,7 @@ Phase 0 validation assets:
 - Base schema: `schemas/modspec.schema.json`.
 - First target profile schema: `schemas/profiles/forge-1.20.1.schema.json`.
 - Valid examples: `examples/modspec/basic-item.json`, `examples/modspec/basic-block.json`, and `examples/modspec/item-with-recipe.json`.
-- Invalid examples: `examples/modspec/invalid-cases/duplicate-id.json` and `examples/modspec/invalid-cases/path-traversal-id.json`.
+- Invalid examples: `examples/modspec/invalid-cases/duplicate-id.json`, `examples/modspec/invalid-cases/path-traversal-id.json`, and recipe semantic validation fixtures under `examples/modspec/invalid-cases/`.
 
 ## Documentation Map
 

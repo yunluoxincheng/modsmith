@@ -1,5 +1,5 @@
 # Documentation Version
 
-Current package: `v2.4.5`
+Current package: `v2.4.6`
 
-Baseline: `v2.4.4` + Phase 0 foundation clarity for README status, ModSpec asset discovery, OpenSpec threshold examples, repository/product naming, and sandbox threat modeling.
+Baseline: `v2.4.5` + ModSpec content array requirements, recipe semantic validation fixtures, generated Java target clarification, and target-profile loader extension guidance.

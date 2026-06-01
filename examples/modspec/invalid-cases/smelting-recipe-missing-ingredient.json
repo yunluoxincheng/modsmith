@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "0.1",
+  "target": {
+    "loader": "forge",
+    "minecraftVersion": "1.20.1",
+    "javaVersion": 17,
+    "mappings": {
+      "channel": "official",
+      "version": "1.20.1"
+    },
+    "loaderVersion": "47.4.10",
+    "targetProfile": "forge-1.20.1"
+  },
+  "mod": {
+    "modId": "invalid_smelting",
+    "displayName": "Invalid Smelting",
+    "version": "0.1.0",
+    "description": "Fixture for a smelting recipe that is missing its ingredient.",
+    "packageName": "com.modsmith.generated.invalid_smelting",
+    "authors": [
+      "ModSmith AI"
+    ],
+    "license": "All Rights Reserved"
+  },
+  "content": {
+    "items": [
+      {
+        "id": "copper_dust",
+        "displayName": "Copper Dust",
+        "type": "basic",
+        "maxStackSize": 64,
+        "creativeTab": "ingredients",
+        "texture": {
+          "mode": "placeholder"
+        }
+      }
+    ],
+    "blocks": [],
+    "recipes": [
+      {
+        "id": "copper_dust_from_smelting",
+        "type": "smelting",
+        "result": {
+          "item": "copper_dust",
+          "count": 1
+        },
+        "experience": 0.1,
+        "cookingTime": 200
+      }
+    ],
+    "lootTables": [],
+    "tags": []
+  },
+  "unsupportedRequests": [],
+  "notes": [
+    "Expected to pass JSON Schema and fail semantic validation because smelting requires ingredient."
+  ],
+  "loaderExtensions": {
+    "forge": {}
+  }
+}

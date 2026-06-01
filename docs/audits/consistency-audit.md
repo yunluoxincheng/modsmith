@@ -108,6 +108,16 @@ The v2.4.5 documentation package improves first-reader clarity and Phase 0 imple
 6. Clarified that the repository name is `modsmith` while the product name is `ModSmith AI`.
 7. Verified valid ModSpec examples pass base and Forge profile JSON Schema validation, path traversal fails base validation, and duplicate IDs remain a semantic-validation fixture.
 
+## v2.4.6 ModSpec Fixture Tightening Notes
+
+The v2.4.6 documentation package tightens the Phase 0 ModSpec validation contract:
+
+1. Required all `content` collection arrays in `schemas/modspec.schema.json`.
+2. Clarified that `target.javaVersion` is the generated mod Java target, not the backend runtime.
+3. Added recipe semantic validation fixtures for missing shaped recipe key, missing smelting ingredient, and missing recipe result reference.
+4. Corrected `examples/modspec/item-with-recipe.json` description.
+5. Clarified that wrong `loaderExtensions` keys should be classified as target profile validation errors.
+
 ## Validation Boundary
 
 The documentation uses two validation layers:

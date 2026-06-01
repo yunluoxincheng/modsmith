@@ -44,6 +44,7 @@
           "maxLength": 64
         },
         "javaVersion": {
+          "description": "Java target version for the generated mod source. This is not the ModSmith backend runtime Java version.",
           "type": "integer",
           "enum": [
             17,
@@ -127,6 +128,13 @@
     "content": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "items",
+        "blocks",
+        "recipes",
+        "lootTables",
+        "tags"
+      ],
       "properties": {
         "items": {
           "type": "array",

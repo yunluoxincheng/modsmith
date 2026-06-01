@@ -47,6 +47,20 @@ The base target object uses generic names:
 
 The base schema must not contain a hard-coded `forge` constant. Forge constraints belong to `schemas/profiles/forge-1.20.1.schema.json`.
 
+`target.javaVersion` is the Java target for generated mod source, not the Java runtime used by the ModSmith backend.
+
+## Content Object
+
+The `content` object must explicitly include these arrays, even when they are empty:
+
+- `items`
+- `blocks`
+- `recipes`
+- `lootTables`
+- `tags`
+
+Schema `default` values are documentation hints only. Validators must not depend on JSON Schema defaults being injected into input documents.
+
 ## First Profile Constraints
 
 The first profile requires:
@@ -71,6 +85,7 @@ Rules:
 2. Do not use `loaderExtensions` to bypass feature support checks.
 3. Each adapter may read only its own key, such as `loaderExtensions.forge`.
 4. Base validation should allow `loaderExtensions`, but target profile validation should restrict what the selected adapter accepts.
+5. If `target.targetProfile` is `forge-1.20.1` and `loaderExtensions` contains another loader key, such as `fabric`, validation should classify it as a target profile validation error.
 
 Example:
 
@@ -158,3 +173,9 @@ The semantic validator must additionally check:
 Any future Forge `47.x.y` compatibility policy beyond `47.4.10` must be introduced through an OpenSpec change that updates the target profile schema, template metadata, and build acceptance tests together.
 
 For example, `examples/modspec/invalid-cases/duplicate-id.json` is expected to pass the base JSON Schema but fail semantic validation with a duplicate ID error.
+
+The recipe invalid examples under `examples/modspec/invalid-cases/` are also expected to pass JSON Schema and fail semantic validation:
+
+- `shaped-recipe-missing-key.json`
+- `smelting-recipe-missing-ingredient.json`
+- `recipe-result-missing-reference.json`

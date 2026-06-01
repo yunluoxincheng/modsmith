@@ -12,11 +12,11 @@
     "targetProfile": "forge-1.20.1"
   },
   "mod": {
-    "modId": "compressed_copper",
-    "displayName": "Compressed Copper",
+    "modId": "missing_recipe_result",
+    "displayName": "Missing Recipe Result",
     "version": "0.1.0",
-    "description": "Adds compressed copper crafted from copper ingots for the first recipe generator test.",
-    "packageName": "com.modsmith.generated.compressed_copper",
+    "description": "Fixture for a recipe result that references missing generated content.",
+    "packageName": "com.modsmith.generated.missing_recipe_result",
     "authors": [
       "ModSmith AI"
     ],
@@ -32,38 +32,19 @@
         "creativeTab": "ingredients",
         "texture": {
           "mode": "placeholder"
-        },
-        "translations": {
-          "en_us": "Copper Nugget",
-          "zh_cn": "铜粒"
-        }
-      },
-      {
-        "id": "compressed_copper",
-        "displayName": "Compressed Copper",
-        "type": "basic",
-        "maxStackSize": 64,
-        "creativeTab": "ingredients",
-        "texture": {
-          "mode": "placeholder"
         }
       }
     ],
     "blocks": [],
     "recipes": [
       {
-        "id": "compressed_copper_from_copper_ingot",
-        "type": "shaped_crafting",
-        "pattern": [
-          "CCC",
-          "CCC",
-          "CCC"
+        "id": "missing_result_from_copper_nugget",
+        "type": "shapeless_crafting",
+        "ingredients": [
+          "copper_nugget"
         ],
-        "key": {
-          "C": "minecraft:copper_ingot"
-        },
         "result": {
-          "item": "compressed_copper",
+          "item": "missing_result",
           "count": 1
         }
       }
@@ -73,7 +54,7 @@
   },
   "unsupportedRequests": [],
   "notes": [
-    "Phase 1 smoke-test ModSpec."
+    "Expected to pass JSON Schema and fail semantic validation because result item is not generated content or a namespaced external item."
   ],
   "loaderExtensions": {
     "forge": {}

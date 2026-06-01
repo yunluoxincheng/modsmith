@@ -12,11 +12,11 @@
     "targetProfile": "forge-1.20.1"
   },
   "mod": {
-    "modId": "compressed_copper",
-    "displayName": "Compressed Copper",
+    "modId": "invalid_recipes",
+    "displayName": "Invalid Recipes",
     "version": "0.1.0",
-    "description": "Adds compressed copper crafted from copper ingots for the first recipe generator test.",
-    "packageName": "com.modsmith.generated.compressed_copper",
+    "description": "Fixture for a shaped recipe that is missing its key map.",
+    "packageName": "com.modsmith.generated.invalid_recipes",
     "authors": [
       "ModSmith AI"
     ],
@@ -24,20 +24,6 @@
   },
   "content": {
     "items": [
-      {
-        "id": "copper_nugget",
-        "displayName": "Copper Nugget",
-        "type": "basic",
-        "maxStackSize": 64,
-        "creativeTab": "ingredients",
-        "texture": {
-          "mode": "placeholder"
-        },
-        "translations": {
-          "en_us": "Copper Nugget",
-          "zh_cn": "铜粒"
-        }
-      },
       {
         "id": "compressed_copper",
         "displayName": "Compressed Copper",
@@ -59,9 +45,6 @@
           "CCC",
           "CCC"
         ],
-        "key": {
-          "C": "minecraft:copper_ingot"
-        },
         "result": {
           "item": "compressed_copper",
           "count": 1
@@ -73,7 +56,7 @@
   },
   "unsupportedRequests": [],
   "notes": [
-    "Phase 1 smoke-test ModSpec."
+    "Expected to pass JSON Schema and fail semantic validation because shaped_crafting requires key."
   ],
   "loaderExtensions": {
     "forge": {}
