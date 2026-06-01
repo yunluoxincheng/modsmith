@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  validate-json:
+    name: Validate JSON files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate JSON syntax
+        run: |
+          find schemas examples -name "*.json" -print0 | xargs -0 -n1 python -m json.tool > /dev/null
+
+  check-required-files:
+    name: Check required project files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          test -f README.md
+          test -f AGENTS.md
+          test -f docs/README.md
+          test -f schemas/modspec.schema.json
+          test -f schemas/profiles/forge-1.20.1.schema.json
+          test -f examples/modspec/basic-item.json
+          test -f examples/modspec/basic-block.json
+          test -f examples/modspec/item-with-recipe.json
+          test -f examples/modspec/invalid-cases/duplicate-id.json
+          test -f examples/modspec/invalid-cases/path-traversal-id.json
+
+  check-markdown-links-light:
+    name: Check key documentation references
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check key docs exist
+        run: |
+          test -f docs/engineering/repository-structure.md
+          test -f docs/engineering/openspec-workflow.md
+          test -f docs/engineering/sandbox-threat-model.md
+          test -f docs/specs/modspec-schema.md
+          test -f docs/plans/README.md
