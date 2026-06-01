@@ -19,6 +19,8 @@ The repository is named `modsmith`; the product name is `ModSmith AI`.
 
 ```text
 modsmith/
+├─ .github/
+│  └─ pull_request_template.md
 ├─ README.md
 ├─ VERSION.md
 ├─ AGENTS.md
@@ -131,6 +133,7 @@ modsmith/
    │  ├─ local-development-setup.md
    │  ├─ schema-validation-implementation-notes.md
    │  ├─ development-guidelines.md
+   │  ├─ branch-and-pr-workflow.md
    │  ├─ openspec-workflow.md
    │  ├─ build-and-sandbox-policy.md
    │  ├─ sandbox-threat-model.md

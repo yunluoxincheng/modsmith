@@ -1,5 +1,5 @@
 # Documentation Version
 
-Current package: `v2.4.6`
+Current package: `v2.4.7`
 
-Baseline: `v2.4.5` + ModSpec content array requirements, recipe semantic validation fixtures, generated Java target clarification, and target-profile loader extension guidance.
+Baseline: `v2.4.6` + branch/PR workflow documentation and pull request template.
